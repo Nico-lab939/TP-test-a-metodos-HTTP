@@ -57,6 +57,32 @@ function createTask({ title, description, priority }) {
     return newTask;
 }
 
+// Actualiza una tarea existente y persiste en el archivo JSON
+function updateTask(id, updates) {
+    const index = tasks.findIndex((task) => task.id === id);
+    if (index === -1) return null;
+
+    const task = tasks[index];
+    if (updates.title !== undefined) task.title = updates.title;
+    if (updates.description !== undefined) task.description = updates.description;
+    if (updates.priority !== undefined) task.priority = updates.priority;
+    if (updates.completed !== undefined) task.completed = updates.completed;
+    task.updatedAt = new Date().toISOString();
+
+    save();
+    return { ...task };
+}
+
+// Elimina una tarea por id y persiste en el archivo JSON
+function deleteTask(id) {
+    const index = tasks.findIndex((task) => task.id === id);
+    if (index === -1) return null;
+
+    const [deleted] = tasks.splice(index, 1);
+    save();
+    return deleted;
+}
+
 loadTasks();
 
-export { getAllTasks, getById, createTask };
+export { getAllTasks, getById, createTask, updateTask, deleteTask };

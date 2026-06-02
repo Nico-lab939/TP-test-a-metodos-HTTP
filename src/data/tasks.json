@@ -18,12 +18,12 @@
     "updatedAt": "2026-05-12T00:02:44.001Z"
   },
   {
-    "id": "b839f3b6-353d-4c27-bb1d-9949ad3aa1b8",
+    "id": "7ac0d8d3-88f6-410a-8bf5-3e9ca6a180b8",
     "title": "Mi tarea nueva",
     "description": "Probando POST",
     "priority": "high",
     "completed": false,
-    "createdAt": "2026-05-30T00:00:33.379Z",
-    "updatedAt": "2026-05-30T00:00:33.379Z"
+    "createdAt": "2026-06-02T20:27:39.013Z",
+    "updatedAt": "2026-06-02T20:27:39.013Z"
   }
 ]
