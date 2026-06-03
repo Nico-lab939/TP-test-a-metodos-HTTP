@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f6f8fb;
+            color: #2a2a2a;
+        }
+        header {
+            background: #2f72b7;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 24px auto;
+            padding: 0 16px 32px;
+        }
+        h1, h2 {
+            margin: 0 0 16px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.08);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+        th, td {
+            padding: 12px 10px;
+            border: 1px solid #e1e4ea;
+            text-align: left;
+        }
+        th {
+            background: #eef3fb;
+        }
+        code {
+            background: #f0f2f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        .hint {
+            color: #555;
+            font-size: 0.95em;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><%= title %></h1>
+        <p>Documentación de la API de tareas con métodos HTTP y JSON.</p>
+    </header>
+    <main>
+        <div class="card">
+            <h2>Endpoints disponibles</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Método</th>
+                        <th>Ruta</th>
+                        <th>Descripción</th>
+                        <th>Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% apiDocs.forEach(doc => { %>
+                        <tr>
+                            <td><strong><%= doc.method %></strong></td>
+                            <td><code><%= doc.path %></code></td>
+                            <td><%= doc.description %></td>
+                            <td>
+                                <% if (doc.body) { %>
+                                    <pre><%= JSON.stringify(doc.body, null, 2) %></pre>
+                                <% } else { %>
+                                    <em>Ninguno</em>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <p class="hint">La mayoría de los endpoints usan JSON en el body para crear o actualizar tareas.</p>
+        </div>
+        <div class="card">
+            <h2>Ejemplo de uso</h2>
+            <p>Usa <code>POST <%= apiPrefix %>/tasks</code> para crear una tarea:</p>
+            <pre>{
+  "title": "Comprar leche",
+  "description": "Ir al supermercado después del trabajo",
+  "priority": "mid"
+}</pre>
+            <p>Usa <code>PUT <%= apiPrefix %>/tasks/:id</code> para actualizar una tarea existente.</p>
+        </div>
+    </main>
+</body>
+</html>

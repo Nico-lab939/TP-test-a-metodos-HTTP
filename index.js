@@ -6,7 +6,66 @@ const PORT = process.env.PORT || 3000;
 const API_PREFIX = "/api/v1";
 const server = express();
 
+server.set('view engine', 'ejs');
+server.set('views', './views');
+
 server.use(express.json());
+
+server.get('/', (req, res) => {
+    const apiDocs = [
+        {
+            method: 'GET',
+            path: '/health',
+            description: 'Comprueba que el servidor está en funcionamiento.',
+            body: null,
+        },
+        {
+            method: 'GET',
+            path: `${API_PREFIX}/tasks`,
+            description: 'Obtiene todas las tareas existentes.',
+            body: null,
+        },
+        {
+            method: 'GET',
+            path: `${API_PREFIX}/tasks/:id`,
+            description: 'Obtiene una tarea específica por su id.',
+            body: null,
+        },
+        {
+            method: 'POST',
+            path: `${API_PREFIX}/tasks`,
+            description: 'Crea una nueva tarea.',
+            body: {
+                title: 'string (obligatorio)',
+                description: 'string (opcional)',
+                priority: 'low | mid | high (opcional)',
+            },
+        },
+        {
+            method: 'PUT',
+            path: `${API_PREFIX}/tasks/:id`,
+            description: 'Actualiza campos de una tarea existente.',
+            body: {
+                title: 'string (opcional)',
+                description: 'string (opcional)',
+                priority: 'low | mid | high (opcional)',
+                completed: 'boolean (opcional)',
+            },
+        },
+        {
+            method: 'DELETE',
+            path: `${API_PREFIX}/tasks/:id`,
+            description: 'Elimina una tarea por su id.',
+            body: null,
+        },
+    ];
+
+    res.render('index', {
+        title: 'API CRUD JSON',
+        apiDocs,
+        apiPrefix: API_PREFIX,
+    });
+});
 
 // health check
 server.use("/health", healthRouter);
