@@ -11,7 +11,9 @@ server.set('views', './views');
 
 server.use(express.json());
 
+// Ruta de inicio (index route) que muestra la documentación de la API en EJS
 server.get('/', (req, res) => {
+    // Definimos la documentación de los endpoints disponibles
     const apiDocs = [
         {
             method: 'GET',
@@ -60,6 +62,7 @@ server.get('/', (req, res) => {
         },
     ];
 
+    // Renderizamos la plantilla EJS 'index' y le pasamos los datos de la API
     res.render('index', {
         title: 'API CRUD JSON',
         apiDocs,
