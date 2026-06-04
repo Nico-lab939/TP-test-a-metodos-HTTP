@@ -35,6 +35,3 @@ Rutas de prueba para los distintos métodos HTTP:
   - URL de ejemplo: http://localhost:3000/api/v1/tasks/d11406b4-9c8e-4fc4-8cb6-dee2eb9e9967
   - Elimina una tarea por su id.
 
-Nota:
-- La ruta http://localhost:3000/tasks devuelve 404 porque requiere el prefijo /api/v1.
-- Para POST y PUT, envía el body como JSON con el encabezado Content-Type: application/json.
